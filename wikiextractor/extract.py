@@ -86,7 +86,7 @@ def clean(extractor, text, expand_templates=False, html_safe=True):
         text = dropNested(text, r'{{', r'}}')
 
     # Drop tables
-    #text = dropNested(text, r'{\|', r'\|}')
+    text = dropNested(text, r'{\|', r'\|}')
 
     # replace external links
     text = replaceExternalLinks(text)
