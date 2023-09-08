@@ -59,7 +59,6 @@ discardElements = [
 #
 acceptedNamespaces = ['w', 'wiktionary', 'wikt']
 
-
 def get_url(urlbase, uid):
     return "%s?curid=%s" % (urlbase, uid)
 
@@ -87,7 +86,7 @@ def clean(extractor, text, expand_templates=False, html_safe=True):
         text = dropNested(text, r'{{', r'}}')
 
     # Drop tables
-    text = dropNested(text, r'{\|', r'\|}')
+    #text = dropNested(text, r'{\|', r'\|}')
 
     # replace external links
     text = replaceExternalLinks(text)
@@ -259,7 +258,9 @@ def compact(text, mark_headers=False):
                     line = line[l:].strip()
                 page.append(listItem[type] % line)
             else:
-                continue
+                if line[0] in '*':
+                    page.append(line.lstrip('*'))
+
         elif len(listLevel):    # implies Extractor.HtmlFormatting
             for c in reversed(listLevel):
                 page.append(listClose[c])
